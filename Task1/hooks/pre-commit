@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+base_path=$(pwd)
+processed_paths=()
+
+for changed_file in $(git diff --cached --name-only); do
+  changed_path=$(dirname "$changed_file")
+  if [[ ! " ${processed_paths[*]} " =~ " ${changed_path} " ]]; then
+    cd "$base_path/$changed_path" &&       terraform fmt -recursive &&       terraform init -backend=false &&       terraform validate
+    processed_paths+=("$changed_path")
+  fi
+done
