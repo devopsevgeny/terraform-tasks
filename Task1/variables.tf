@@ -22,14 +22,14 @@ variable "container_name" {
 
 variable "int_port" {
   type    = string
-  default = "2368"
+  default = "80"
 }
 
 variable "ext_port" {
   type = map(string)
   default = {
-    dev  = "8081"
-    prod = "8080"
+    dev  = "8080"
+    prod = "8081"
   }
 }
 
